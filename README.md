@@ -5,6 +5,7 @@ Experimental tool to download Supercell assets from game-assets server written i
 ## Usage
 Currently supported games:
 - laser (Brawl Stars)
+- squad (Squad Busters)
 
 > Example Usage: SupercellAssetDownloader.exe --game laser --version 62 --asset sc/ui.sc
 
