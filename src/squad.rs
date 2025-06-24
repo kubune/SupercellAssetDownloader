@@ -6,7 +6,7 @@ use std::time::Instant;
 pub fn DownloadAsset(ver: String, asset: String) {
     let start = Instant::now();
     
-    let sha: String = get_sha(ver, "laser".to_owned());
+    let sha: String = get_sha(ver, "squad".to_owned());
     if sha == "Wrong" {
         return;
     }
@@ -16,8 +16,8 @@ pub fn DownloadAsset(ver: String, asset: String) {
     if asset.ends_with(".sc") {
         SCFile = true;
     }
-    let DownloadURL: String = format!("https://game-assets.brawlstarsgame.com/{}/{}", sha, asset);
-    let FingerprintURL: String = format!("https://game-assets.brawlstarsgame.com/{}/{}", sha, "fingerprint.json");
+    let DownloadURL: String = format!("https://game-assets.squadbustersgame.com/{}/{}", sha, asset);
+    let FingerprintURL: String = format!("https://game-assets.squadbustersgame.com/{}/{}", sha, "fingerprint.json");
     let finger_response = get(FingerprintURL).unwrap();
     let finger_response_text = finger_response.text().unwrap();
     
@@ -57,7 +57,7 @@ fn HandleSCFileDownload(asset: String, files: &Vec<Value>, sha: String) {
     let mut downloaded = false;
     for variant in &variants {
         if files.iter().any(|f| f.get("file").and_then(|v| v.as_str()) == Some(variant)) {
-            let url = format!("https://game-assets.brawlstarsgame.com/{}/{}", sha, variant);
+            let url = format!("https://game-assets.squadbustersgame.com/{}/{}", sha, variant);
             if DownloadFile(url, variant.clone()).is_ok() {
                 downloaded = true;
             }
