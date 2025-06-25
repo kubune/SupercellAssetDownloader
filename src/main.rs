@@ -1,11 +1,13 @@
 use clap::Parser;
+mod logger;
 mod downloader;
 mod converter;
-mod laser;
-mod squad;
+mod game;
 
 pub const LASER_JSON: &str = include_str!("json/laser.json");
 pub const SQUAD_JSON: &str = include_str!("json/squad.json");
+
+pub const GAME_TYPE: &str = include_str!("json/game_types.json");
 
 #[derive(Parser, Debug)]
 #[command(name = "SupercellAssetsDownloader")]
@@ -23,10 +25,6 @@ struct Args {
 
 fn main() {
     let args = Args::parse();
-    println!("Downloading...\nSelected Game: {}\nSelected Asset: {}", args.game, args.asset);
-    if args.game == "laser" {
-        laser::DownloadAsset(args.version, args.asset);
-    } else if args.game == "squad" {
-        squad::DownloadAsset(args.version, args.asset);
-    }
+    logger::info(&format!("Downloading...\nSelected Game: {}\nSelected Asset: {}", args.game, args.asset));
+    game::download_asset(args.version, args.asset, args.game);
 }

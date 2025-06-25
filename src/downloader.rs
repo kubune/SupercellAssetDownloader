@@ -1,13 +1,14 @@
 use std::{fs::File, io::Write};
 use reqwest::blocking::get;
 
-pub fn DownloadFile(url: String, asset: String) -> Result<(), Box<dyn std::error::Error>> {
+use crate::logger;
+
+pub fn download_file(url: String, asset: String) -> Result<(), Box<dyn std::error::Error>> {
     let response = get(&url)?;
-    let downloadedFile = response.bytes()?;
-
+    let downloaded_file = response.bytes()?;
     let mut file  = File::create(&asset.split("/").last().unwrap())?;
-    file.write_all(&downloadedFile)?;
+    file.write_all(&downloaded_file)?;
 
-    println!("[SUCCESS] Downloaded {}!", asset);
+    logger::success(&format!("Downloaded {}!", asset));
     return Ok(());
 }
