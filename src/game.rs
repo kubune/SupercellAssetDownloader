@@ -68,6 +68,6 @@ fn handle_scfile_download(asset: &str, files: &Vec<Value>, sha: String, game: &S
         }
     } 
     if !downloaded {
-        logger::info(&format!("[INFO] {} has no texture files. The textures are probably in the asset", asset));
+        logger::info(&format!("{} has no texture files. The textures are probably in the asset", asset));
     }
 }

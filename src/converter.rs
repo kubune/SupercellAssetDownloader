@@ -15,7 +15,7 @@ pub fn get_sha(ver: String, game: &String) -> String {
         }
     }
     if latest == "" {
-        logger::error(&format!("[ERROR] Invalid version: {}", &ver));
+        logger::error(&format!("Invalid version: {}", &ver));
         return "Wrong".to_owned();
     }
     return data[latest].as_str().unwrap().to_string(); // sha
